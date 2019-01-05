@@ -1,0 +1,21 @@
+[
+  {
+    "id": 1,
+    "name": "Lemon water",
+    "requirements": [
+      { "id": 1, "amount": 1 }
+    ],
+    "category": "Beverages",
+    "price": 1.00
+  },
+  {
+    "id": 2,
+    "name": "Sweet lemonade",
+    "requirements": [
+      { "id": 1, "amount": 1 },
+      { "id": 2, "amount": 1 }
+    ],
+    "category": "Beverages",
+    "price": 1.00
+  }
+]

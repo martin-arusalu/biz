@@ -14,8 +14,3 @@ db.once('open', function () {
 
   app.listen(env.port, () => console.log(`Visit ${env.url}:${env.port}`));
 });
-
-// const Users = db.collection('users');
-//     const Companies = db.collection('companies');
-//     const Products = db.collection('products');
-//     const CompaniesProducts = db.collection('companies_products');
