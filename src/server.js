@@ -3,7 +3,7 @@ import cors from 'cors';
 import mongoose from 'mongoose';
 import env from './config';
 import bodyParser from 'body-parser';
-import User from './models/User';
+import usersRoutes from './routes/users';
 
 mongoose.connect(env.dbUrl)
 const db = mongoose.connection;
@@ -15,31 +15,7 @@ db.once('open', function () {
 
   app.get('/', (req, res) => res.send('Hi!'));
 
-  app.get('/users', (req, res) => {
-    User.find((err, users) => {
-      res.json(users);
-    })
-  });
-
-  app.post("/register", (req, res) => {
-    User.create({
-      name: req.body.name,
-      password: req.body.password,
-      money: 1000
-    }, (err, newUser) => {
-      res.json(newUser);
-    });
-  });
-
-  app.post('/login', (req, res) => {
-    User.find({ name: req.body.name, password: req.body.password }, (err, user) => {
-      if (user && user.length) {
-        res.json(user);
-      } else {
-        res.send(false);
-      }
-    })
-  })
+  app.use('/users', usersRoutes);
 
   app.listen(env.port, () => console.log(`Visit ${env.url}:${env.port}`));
 });
