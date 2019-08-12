@@ -1,10 +1,12 @@
 import express from 'express';
-import Product from '../models/Product';
+import ProductEntity from '../models/ProductEntity';
 
 const router = express.Router();
 
 router.get('/', (req, res) => {
-  Product.find()
+  ProductEntity.find()
+    .populate('company')
+    .populate('product')
     .exec((err, products) => {
       if (err) return res.status(500).send(err);
       res.json(products);
@@ -12,21 +14,25 @@ router.get('/', (req, res) => {
 });
 
 router.post("/create", (req, res) => {
-  Product.create(req.body, (err, newProduct) => {
+  const product = req.body;
+  product.quality = Math.floor(Math.random() * 100);
+  
+  ProductEntity.create(product, (err, newProduct) => {
     if (err) return res.status(500).send(err);
     res.json(newProduct);
   });
 });
 
-router.delete('/remove/:productId', (req, res) => {
-  Product.findByIdAndRemove(req.params.productId, (err, product) => {
+router.delete('/remove/:productEntityId', (req, res) => {
+  ProductEntity.findByIdAndRemove(req.params.productEntityId, (err, product) => {
     if (err) return res.status(500).send(err);
     const response = {
-      message: "Product successfully deleted",
+      message: "Product entity successfully deleted",
       id: product._id
     };
     return res.status(200).send(response);
   })
 });
+
 
 module.exports = router;
