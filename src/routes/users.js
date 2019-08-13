@@ -5,9 +5,8 @@ import Company from '../models/Company';
 const router = express.Router();
 
 router.get('/', (req, res) => {
-  User.find()
-    .populate('companies')
-    .exec((err, users) => {
+  User.find((err, users) => {
+      console.log(users);
       if (err) return res.status(500).send(err);
       res.json(users);
     })

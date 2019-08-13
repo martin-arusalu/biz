@@ -6,7 +6,9 @@
   "scripts": {
     "nodemon": "nodemon --watch src --exec npm start",
     "start": "npm run build && node ./build/server.js",
-    "build": "babel src -d build"
+    "build": "babel src -d build",
+    "clients": "npm run build && node ./build/clients.js",
+    "nodemon-clients": "nodemon --watch src --exec npm run clients"
   },
   "repository": {
     "type": "git",

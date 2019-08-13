@@ -3,6 +3,8 @@ const Schema = mongoose.Schema;
 
 const CompanySchema = new Schema({
   name: String,
+  money: Number,
+  reputation: Number,
   owner: { type: Schema.Types.ObjectId, ref: 'User' },
 });
 
