@@ -3,10 +3,21 @@ const Schema = mongoose.Schema;
 
 const UserSchema = new Schema({
   name: String,
-  password: String,
+  emailAddress: {
+    type: String,
+    required: true,
+    unique: true,
+  },
+  userName: {
+    type: String,
+    required: true,
+    unique: true
+  },
+  password: {
+    type: String,
+    required: true
+  },
   companies : [{ type: Schema.Types.ObjectId, ref: 'Company' }]
 });
 
-const User = mongoose.model('User', UserSchema);
-
-export default User;
+module.exports = mongoose.model('User', UserSchema);

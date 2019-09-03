@@ -9,7 +9,7 @@ mongoose.connect(env.dbUrl)
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function () {
-  console.log('opeeen');
+  console.log('Database connection open');
   setInterval(() => {
     CompanyProduct
       .find()
@@ -18,10 +18,8 @@ db.once('open', function () {
         res.forEach(async product => {
           if (Math.random() > 0.9) {
             const comp = await Company.findById(product.company._id);
-            console.log(comp);
             comp.money += 10;
             await comp.save();
-            console.log(comp);
             await CompanyProduct.findByIdAndDelete(product._id);
           }
         });
