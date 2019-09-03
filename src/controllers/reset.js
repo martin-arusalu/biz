@@ -1,8 +1,8 @@
-import CompanyProduct from '../models/company-product';
-import Product from '../models/product';
-import Company from '../models/company';
-import User from '../models/user';
-import users from '../../data/users.json';
+const CompanyProduct = require('../models/company-product');
+const Product = require('../models/product');
+const Company = require('../models/company');
+const User = require('../models/user');
+const users = require('../../data/users.json');
 
 async function resetTest(req, res) {
   // clear

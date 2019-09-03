@@ -1,4 +1,5 @@
-import mongoose from 'mongoose';
+const mongoose = require('mongoose');
+
 const Schema = mongoose.Schema;
 
 const CompanySchema = new Schema({
@@ -8,6 +9,4 @@ const CompanySchema = new Schema({
   owner: { type: Schema.Types.ObjectId, ref: 'User' },
 });
 
-const Company = mongoose.model('Company', CompanySchema);
-
-export default Company;
+module.exports = mongoose.model('Company', CompanySchema);

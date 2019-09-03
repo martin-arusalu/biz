@@ -1,5 +1,5 @@
-import mongoose from 'mongoose';
-import env from './config';
+const mongoose = require('mongoose');
+const { env } = require('./config');
 
 function initDb() {
   mongoose.connect(env.dbUrl)

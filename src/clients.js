@@ -1,13 +1,15 @@
 import mongoose from 'mongoose';
 import env from './config';
 import CompanyProduct from './models/CompanyProduct';
-import Product from './models/Product';
-import Company from './models/Company';
-import User from './models/User';
+const Product = require('./models/Product');
+const Company = require('./models/Company');
+const User = require('./models/User');
 
 mongoose.connect(env.dbUrl)
 const db = mongoose.connection;
+
 db.on('error', console.error.bind(console, 'connection error:'));
+
 db.once('open', function () {
   console.log('Database connection open');
   setInterval(() => {

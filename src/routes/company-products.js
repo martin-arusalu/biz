@@ -1,17 +1,5 @@
-import express from 'express';
-import CompanyProduct from '../models/company-product';
-
-const router = express.Router();
-
-router.get('/', (req, res) => {
-  CompanyProduct.find()
-    .populate('company')
-    .populate('product')
-    .exec((err, products) => {
-      if (err) return res.status(500).send(err);
-      res.json(products);
-    });
-});
+const router = require('express').Router();
+const CompanyProduct = require('../models/company-product');
 
 router.post("/create", (req, res) => {
   const product = req.body;
