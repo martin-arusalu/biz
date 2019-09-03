@@ -6,7 +6,6 @@ const router = express.Router();
 
 router.get('/', (req, res) => {
   User.find((err, users) => {
-      console.log(users);
       if (err) return res.status(500).send(err);
       res.json(users);
     })
