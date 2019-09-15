@@ -1,15 +1,13 @@
 const mongoose = require('mongoose');
-
 const Schema = mongoose.Schema;
 
 const UserSchema = new Schema({
-  name: String,
-  emailAddress: {
+  email: {
     type: String,
     required: true,
     unique: true,
   },
-  userName: {
+  username: {
     type: String,
     required: true,
     unique: true
@@ -18,6 +16,7 @@ const UserSchema = new Schema({
     type: String,
     required: true
   },
+  money: Number,
   companies : [{ type: Schema.Types.ObjectId, ref: 'Company' }]
 });
 

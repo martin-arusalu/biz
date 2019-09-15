@@ -14,7 +14,7 @@ const initDb = require('./db');
 const passportConfig = require('./passport-config');
 
 initDb();
-const app = express()
+const app = express();
 
 app.use(cp());
 app.use(bp.urlencoded({extended: false}));
@@ -26,11 +26,21 @@ passportConfig(passport);
 app.get('/', (req, res) => res.send('Hi!'));
 
 app.use('/auth', authRoutes);
+
 app.use('/users',
 passport.authenticate('jwt', {session: false}),
 usersRoutes);
-app.use('/companies', companiesRoutes);
-app.use('/products', productsRoutes);
-app.use('/company-products', companyProductRoutes);
+
+app.use('/companies',
+passport.authenticate('jwt', {session: false}),
+companiesRoutes);
+
+app.use('/products',
+passport.authenticate('jwt', {session: false}),
+productsRoutes);
+
+app.use('/company-products',
+passport.authenticate('jwt', {session: false}),
+companyProductRoutes);
 
 app.listen(env.port, () => console.log(`Visit ${env.url}:${env.port}`));

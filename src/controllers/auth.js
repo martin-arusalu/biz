@@ -4,16 +4,16 @@ const jwt = require('jsonwebtoken');
 const { secret } = require('../config');
 
 function register(req, res) {
-  User.findOne({ emailAddress: req.body.emailAddress }, (err, user) => {
+  User.findOne({ username: req.body.username }, (err, user) => {
     if (user) {
-      let error = 'Email Address Exists in Database.';
+      let error = 'Username Exists in Database.';
       return res.status(400).json(error);
     } else {
       const newUser = new User({
-        name: req.body.name,
-        emailAddress: req.body.emailAddress,
+        email: req.body.email,
         password: req.body.password,
-        userName: req.body.userName
+        username: req.body.username,
+        money: 4000
       });
       bcrypt.genSalt(10, (err, salt) => {
         if (err) throw err;
@@ -30,9 +30,9 @@ function register(req, res) {
 }
 
 function login(req, res) {
-  const userName = req.body.userName;
+  const username = req.body.username;
   const password = req.body.password;
-  User.findOne({ userName })
+  User.findOne({ username })
     .then(user => {
       if (!user) {
         let error = 'User not found';
@@ -43,7 +43,7 @@ function login(req, res) {
           if (isMatch) {
             const payload = {
               id: user._id,
-              name: user.userName,
+              name: user.username,
             };
             jwt.sign(payload, secret, { expiresIn: 36000 },
               (err, token) => {
